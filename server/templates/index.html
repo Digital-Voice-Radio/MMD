@@ -1,7 +1,42 @@
 <html>
 	<head>
 	</head>
-	<body>
+<style>
+* { font-family: sans-serif; }
+
+.footer { width: 100%; background-color: black; color: white; padding: 8px 0; }
+.footer a, .footer a:visited, .footer a:active { color: white; }
+.footer a:hover { color: red; }
+.container { max-width: 1000px; margin: 0 auto; }
+
+
+</style>
+
+	<body style="margin: 80px 0; padding: 0;">
+	      <div style="position: fixed; width: 100%; top: 0; left: 0; height: 60px; background-color: black; color: white;">
+		      <div class="container">
+			      <h1>{{conf.Title }}</h1>
+		      </div>
+	      </div>
+	      <div style="max-width: 1000px; margin: 0 auto;">
 	      {% include "part/%s.html" % page %}
+	      </div>
+	      {{conf}}
+
+	      <div class="footer">
+		      <div class="container">
+			   <div style="float: left; width: 50%;">
+				   {{ conf.Copyright }}<br/><br/>
+		      {% for link in conf.Links %}
+		      <a href="{{link.1}}">{{link.0}}</a><br/>
+		      {% endfor %}
+			   </div>
+			   <div style="float: right; width: 25%;">
+				   <a href="https://github.com/digital-voice-Radio/MMD">MMD</a> by VK2WAY
+			   </div>
+		      </div>
+		      <div style="clear: both;"></div>
+
+	      </div>
 	</body>
 </html>

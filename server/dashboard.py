@@ -20,11 +20,7 @@ from data import datastore
 
 from twisted.python import log
 
-CONF = {
-        'DASHBOARD': {},
-        'Port': 8891,
-}
-
+from config import CONFIG
 
 class Search(resource.Resource):
 
@@ -42,7 +38,7 @@ class Search(resource.Resource):
 
         request.setHeader(b'Content-Type', b'application/xml')
         tmpl_res = env.get_template("results.xml")
-        return tmpl_res.render(conf=CONF["DASHBOARD"], data=filter_data).encode('utf-8')
+        return tmpl_res.render(conf=CONFIG["DASHBOARD"], data=filter_data).encode('utf-8')
 
 
 
@@ -65,7 +61,7 @@ class Page(resource.Resource):
                 request.setHeader(i[0], i[1])
         data = datastore.get_phonebook()
         sorted_data = sorted(data, key=lambda x: x["extension"])
-        return self._template.render(conf=CONF["DASHBOARD"], data=sorted_data, page=self._part).encode('utf-8')
+        return self._template.render(conf=CONFIG["DASHBOARD"], data=sorted_data, page=self._part).encode('utf-8')
 
 
 
@@ -90,7 +86,7 @@ if __name__ == "__main__":
     txf.startFactory()
     tx = WebSocketResource(txf)
 
-    rxf = RxFactory(sender=txf, data=datastore, config=CONF)
+    rxf = RxFactory(sender=txf, data=datastore, config=CONFIG)
     rxf.startFactory()
     rx = WebSocketResource(rxf)
 
@@ -106,8 +102,8 @@ if __name__ == "__main__":
     root.putChild(b"static", File("static"))
 
     site = Site(root)
-    log.msg('Listening for HTTP/WS connections on %s' % CONF.get('Port', 8891))
+    log.msg('Listening for HTTP/WS connections on %s' % CONFIG.get('Port', 8891))
 
-    reactor.listenTCP(CONF.get('Port', 8891), site)
+    reactor.listenTCP(CONFIG.get('Port', 8891), site)
     reactor.run()
 
