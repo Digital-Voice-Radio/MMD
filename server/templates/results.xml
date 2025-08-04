@@ -1,0 +1,12 @@
+<CiscoIPPhoneDirectory>
+<Title>NZSIP Directory</Title>
+<Prompt>Select</Prompt>
+{% for itm in data %}{% if itm.devicetype == 'extension' %}
+<DirectoryEntry>
+  <Name>{{ itm.callsign }} - {{ itm.displayname }}</Name>
+  <Telephone>{{ itm.extension }}</Telephone>
+</DirectoryEntry>
+{% endif %}
+{% endfor %}
+</CiscoIPPhoneDirectory>
+

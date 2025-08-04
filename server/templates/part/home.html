@@ -1,0 +1,57 @@
+<script src="/static/js/websocket.js?q=1"></script>
+<style>
+table { font-size: 16pt; font-family: sans-serif; min-width: 800px; margin: 0 auto; border-collapse: collapse; line-height: 140%; }
+th, td { padding: 4px 8px; }
+th { text-align: left; }
+tr:nth-child(even) { background-color: #eee; }
+
+tr.state-UNKNOWN .stateLogo:before { content: '?' }
+
+tr.state-UNAVAILABLE { color: #888; }
+tr.state-UNAVAILABLE .stateLogo:before { content: '\00D7' }
+tr.state-UNAVAILABLE .stateText:before { content: 'Unavailable' }
+
+
+tr.state-INUSE .state { color: blue; }
+tr.state-INUSE .stateLogo:before { content: '\1F4DE' }
+tr.state-INUSE .stateText:before { content: 'In Use' }
+
+tr.state-NOT_INUSE  .state { color: green; }
+tr.state-NOT_INUSE  .stateLogo:before { content: '\1F5F9' }
+tr.state-NOT_INUSE  .stateText:before { content: 'Available' }
+
+tr.state-RINGING .state { color: pink; }
+tr.state-RINGING .stateLogo:before { content: '\23F0' }
+tr.state-RINGING .stateText:before { content: 'Ringing' }
+
+
+</style>
+
+<table>
+	<tr>
+		<th></th>
+		<th>Number</th>
+		<th></th>
+		<th>Callsign</th>
+		<th>Name</th>
+		<th>Exchange</th>
+		<th>State</th>
+	</tr>
+{% for itm in data %}
+	<tr id="ext-{{ itm.exchange }}-{{ itm.extension }}" class="state-{{ itm.state }}">
+		<td>
+			{% if itm.devicetype == 'extension' %}&#x260E;{% endif %}
+			{% if itm.devicetype == 'trunk' %}&#x1f517;{% endif %}
+			{% if itm.devicetype == 'service' %}&#128508;{% endif %}
+		</td>
+		<td>{{itm.extension}}</td>
+		<td>
+			<span class="state stateLogo"> </span>
+		</td>
+		<td>{{itm.callsign}}</td>
+		<td>{{itm.displayname}}</td>
+		<td>{{itm.exchange}}</td>
+		<td class="stateText"></td>
+	</tr>
+{% endfor %}
+</table>

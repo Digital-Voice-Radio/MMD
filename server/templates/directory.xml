@@ -1,0 +1,11 @@
+<CiscoIPPhoneInput> 
+<Title>NZSIP Phonebook</Title> 
+<Prompt>Directory Lookup</Prompt> 
+<URL>http://mmd.dvdmr.org/search</URL>
+<InputItem> 
+<DisplayName>Filter</DisplayName> 
+<QueryStringParam>q</QueryStringParam> 
+<InputFlags></InputFlags> 
+<DefaultValue></DefaultValue> 
+</InputItem>  
+</CiscoIPPhoneInput>
