@@ -13,7 +13,7 @@ Dedicated 'sender' applications for each mode translating the events and data fo
 
 Only one sender application exists currently:
 
-* mmdblfsender  AMI BLF Sender for Asteris/FreePBX (https://github.com/Digital-Voice-Radio/mmd-blfsender)
+* mmdblfsender  AMI BLF Sender for Asterisk/FreePBX (https://github.com/Digital-Voice-Radio/mmd-blfsender)
 
 The protocol between sender and server is far from finalised and in fact very specific to the current blf sender.  A next development priority is to define this protocol and build a second sender.
 
